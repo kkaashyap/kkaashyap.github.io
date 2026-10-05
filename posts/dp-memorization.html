@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DP Memorization — Keerthi Kaashyap</title>
+  <meta name="description" content="DP Memorization by Keerthi Kaashyap.">
+
+  <!-- Anti-Scraping & AI Training Opt-Out Conventions -->
+  <meta name="robots" content="noai, noimageai">
+  <meta name="tdm-reservation" content="1">
+
+  <!-- Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root[data-theme="dark"] {
+      --bg: #0b0d10;
+      --text: #ededed;
+      --text-muted: #9aa4b2;
+      --text-dim: #5c6675;
+      --border: rgba(255, 255, 255, 0.1);
+      --border-hover: rgba(255, 255, 255, 0.35);
+      --link-underline: rgba(255, 255, 255, 0.22);
+    }
+
+    :root[data-theme="light"] {
+      --bg: #faf9f6;
+      --text: #14171a;
+      --text-muted: #535d6a;
+      --text-dim: #8b95a2;
+      --border: rgba(0, 0, 0, 0.1);
+      --border-hover: rgba(0, 0, 0, 0.35);
+      --link-underline: rgba(0, 0, 0, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: clamp(2.5rem, 6vw, 4.5rem) 1.5rem clamp(3.5rem, 8vw, 6rem);
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+    }
+
+    .back-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: color 0.15s ease;
+    }
+
+    .back-link:hover {
+      color: var(--text);
+    }
+
+    .theme-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .theme-btn:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+    }
+
+    [data-theme="dark"] .theme-btn .moon-icon { display: none; }
+    [data-theme="dark"] .theme-btn .sun-icon { display: block; }
+    [data-theme="light"] .theme-btn .sun-icon { display: none; }
+    [data-theme="light"] .theme-btn .moon-icon { display: block; }
+
+    .post-header {
+      margin-bottom: 2rem;
+    }
+
+    .post-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .post-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.775rem;
+      color: var(--text-dim);
+    }
+
+    .post-body {
+      min-height: 120px;
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      line-height: 1.68;
+    }
+
+    .todo-placeholder {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8125rem;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <nav class="nav-bar">
+      <a href="../index.html" class="back-link">← Back</a>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+        </svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+        </svg>
+      </button>
+    </nav>
+
+    <header class="post-header">
+      <h1 class="post-title">DP Memorization</h1>
+      <p class="post-meta">Coming Soon</p>
+    </header>
+
+    <article class="post-body">
+      <p class="todo-placeholder">Coming Soon</p>
+    </article>
+  </main>
+
+  <script>
+    (function() {
+      const root = document.documentElement;
+      const themeBtn = document.getElementById("themeToggle");
+
+      function setTheme(theme) {
+        root.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+      }
+
+      const saved = localStorage.getItem("theme") || 
+        (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      setTheme(saved);
+
+      themeBtn.addEventListener("click", () => {
+        const cur = root.getAttribute("data-theme");
+        setTheme(cur === "dark" ? "light" : "dark");
+      });
+    })();
+  </script>
+</body>
+</html>

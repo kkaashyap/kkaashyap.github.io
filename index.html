@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keerthi Kaashyap</title>
+  <meta name="description" content="Portfolio of Keerthi Kaashyap, researcher at Georgia Tech specializing in embodied generalist agents and robotics.">
+
+  <!-- Anti-Scraping & AI Training Opt-Out Conventions -->
+  <meta name="robots" content="noai, noimageai, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noarchive, nosnippet">
+  <meta name="tdm-reservation" content="1">
+  <meta name="format-detection" content="telephone=no, address=no, email=no">
+
+  <!-- Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Theme Color Tokens
+       ========================================================= */
+    :root[data-theme="dark"] {
+      --bg: #0b0d10;
+      --text: #ededed;
+      --text-muted: #9aa4b2;
+      --text-dim: #5c6675;
+      --border: rgba(255, 255, 255, 0.1);
+      --border-hover: rgba(255, 255, 255, 0.35);
+      --link-underline: rgba(255, 255, 255, 0.22);
+      --pfp-border: rgba(255, 255, 255, 0.15);
+    }
+
+    :root[data-theme="light"] {
+      --bg: #faf9f6;
+      --text: #14171a;
+      --text-muted: #535d6a;
+      --text-dim: #8b95a2;
+      --border: rgba(0, 0, 0, 0.1);
+      --border-hover: rgba(0, 0, 0, 0.35);
+      --link-underline: rgba(0, 0, 0, 0.22);
+      --pfp-border: rgba(0, 0, 0, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      height: 100dvh;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      line-height: 1.55;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden; /* Strict no scroll on viewport */
+    }
+
+    /* Minimal Centered Container */
+    .container {
+      max-width: 640px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem;
+    }
+
+    /* Top Header Section */
+    .header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .header-main {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .pfp-wrap {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid var(--pfp-border);
+      position: relative;
+      margin-bottom: 0.25rem;
+      flex-shrink: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .pfp-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .name-title {
+      font-size: 1.45rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .role-block {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .links-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.45rem 1.1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      margin-top: 0.15rem;
+    }
+
+    .link-item a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .link-item a:hover {
+      color: var(--text);
+    }
+
+    /* Sun/Moon Toggle */
+    .theme-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .theme-btn:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+    }
+
+    [data-theme="dark"] .theme-btn .moon-icon {
+      display: none;
+    }
+    [data-theme="dark"] .theme-btn .sun-icon {
+      display: block;
+    }
+
+    [data-theme="light"] .theme-btn .sun-icon {
+      display: none;
+    }
+    [data-theme="light"] .theme-btn .moon-icon {
+      display: block;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      border: none;
+      margin: 1.25rem 0;
+    }
+
+    /* Bio Text */
+    .bio-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      font-size: 0.885rem;
+      line-height: 1.58;
+      color: var(--text-muted);
+    }
+
+    .bio-text a,
+    .update-desc a {
+      color: var(--text);
+      text-decoration: underline;
+      text-decoration-color: var(--link-underline);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.15s ease;
+    }
+
+    .bio-text a:hover,
+    .update-desc a:hover {
+      text-decoration-color: var(--text);
+    }
+
+    /* Recent Updates */
+    .updates-section {
+      margin-top: 1.35rem;
+    }
+
+    .updates-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.65rem;
+      display: block;
+    }
+
+    .updates-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .update-row {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 0.85rem;
+      font-size: 0.835rem;
+      align-items: baseline;
+    }
+
+    .update-date {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+    }
+
+    .update-desc {
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Blog Posts */
+    .posts-section {
+      margin-top: 1.25rem;
+    }
+
+    .posts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .post-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.85rem;
+      font-size: 0.835rem;
+    }
+
+    .post-row a {
+      color: var(--text);
+      text-decoration: underline;
+      text-decoration-color: var(--link-underline);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.15s ease;
+    }
+
+    .post-row a:hover {
+      text-decoration-color: var(--text);
+    }
+
+    .post-tag {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-dim);
+      font-size: 0.725rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* Mobile / Small Screens */
+    @media (max-height: 640px), (max-width: 540px) {
+      body {
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+        overflow-y: auto;
+        justify-content: flex-start;
+      }
+      .container {
+        padding: 2.25rem 1.25rem 2.5rem;
+      }
+      .update-row {
+        grid-template-columns: 72px 1fr;
+        gap: 0.65rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    
+    <!-- Top Profile & Header -->
+    <header class="header">
+      <div class="header-main">
+        <div class="pfp-wrap">
+          <img class="pfp-img" src="pfp.jpg" alt="Keerthi Kaashyap" draggable="false" loading="eager">
+        </div>
+
+        <h1 class="name-title">Keerthi Kaashyap</h1>
+
+        <div class="role-block">
+          Machine Learning · Georgia Tech · People, AI and Robotics Lab
+        </div>
+
+        <ul class="links-list">
+          <li class="link-item"><a href="https://github.com/Arbitrary-2912" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+          <li class="link-item"><a href="https://x.com/_kkaashyap" target="_blank" rel="noopener noreferrer">Twitter / X ↗</a></li>
+          <li class="link-item"><a href="https://www.linkedin.com/in/kk2912" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+        </ul>
+      </div>
+
+      <!-- Sun/Moon Theme Toggle -->
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2"/><path d="M12 20v2"/>
+          <path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/>
+          <path d="M2 12h2"/><path d="M20 12h2"/>
+          <path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+        </svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+        </svg>
+      </button>
+    </header>
+
+    <hr class="divider">
+
+    <!-- Bio Blurb -->
+    <section class="bio-text">
+      <p>
+        I am a Master's student at Georgia Tech specializing in Machine Learning, advised by <a href="https://animesh.garg.tech/" target="_blank" rel="noopener noreferrer">Prof. Animesh Garg</a>. I am also fortunate to work with <a href="https://shreyaskousik.com/" target="_blank" rel="noopener noreferrer">Prof. Shreyas Kousik</a> and <a href="https://faculty.cc.gatech.edu/~hays/" target="_blank" rel="noopener noreferrer">Prof. James Hays</a>.
+      </p>
+      <p>
+        I research generalist embodied agents that can adapt to unstructured environments using large-scale representation learning and multi-modal generative models. I am specifically interested in scaling robot learning to internet-scale data and searching for better spatial priors for robotics.
+      </p>
+      <p>
+        Previously, I've worked at <a href="https://www.databricks.com/" target="_blank" rel="noopener noreferrer">Databricks</a> and <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon</a>, and was an undergraduate researcher at the Generative Graphics Group working with <a href="https://faculty.cc.gatech.edu/~bozhu/" target="_blank" rel="noopener noreferrer">Prof. Bo Zhu</a> developing physically grounded generative models to accelerate high dimensional scientific simulation and discovery.
+      </p>
+    </section>
+
+    <!-- Recent Updates -->
+    <section class="updates-section">
+      <span class="updates-label">Recent Updates</span>
+      <div class="updates-list">
+        <div class="update-row">
+          <span class="update-date">Sep 2026</span>
+          <span class="update-desc"><a href="https://snap-nvs.github.io" target="_blank" rel="noopener noreferrer">SNAP</a> was accepted to NeurIPS 2026!</span>
+        </div>
+        <div class="update-row">
+          <span class="update-date">Aug 2026</span>
+          <span class="update-desc">Finished internship at <a href="https://www.databricks.com/" target="_blank" rel="noopener noreferrer">Databricks</a> and had an enjoyable summer as a <a href="https://fellows.kleinerperkins.com/" target="_blank" rel="noopener noreferrer">KP fellow</a>.</span>
+        </div>
+        <div class="update-row">
+          <span class="update-date">Dec 2025</span>
+          <span class="update-desc">Completed Bachelor's Degree.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="posts-section">
+      <span class="updates-label">Blog Posts</span>
+      <div class="posts-list">
+        <div class="post-row">
+          <a href="posts/heterogenous-noise.html">Heterogenous Noise</a>
+          <span class="post-tag">Coming Soon</span>
+        </div>
+        <div class="post-row">
+          <a href="posts/dp-memorization.html">DP Memorization</a>
+          <span class="post-tag">Coming Soon</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Anti-bot / Anti-crawler Honeypot (Hidden from users) -->
+    <a href="#trap" id="bot-trap" style="display:none;position:absolute;left:-9999px;" rel="nofollow" aria-hidden="true" tabindex="-1">Bot Trap</a>
+
+  </main>
+
+  <script>
+    (function() {
+      const root = document.documentElement;
+      const themeBtn = document.getElementById("themeToggle");
+
+      function setTheme(theme) {
+        root.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+      }
+
+      const saved = localStorage.getItem("theme") || 
+        (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      setTheme(saved);
+
+      themeBtn.addEventListener("click", () => {
+        const cur = root.getAttribute("data-theme");
+        setTheme(cur === "dark" ? "light" : "dark");
+      });
+
+      // Anti-Scraping / Scanner Bot Defense
+      (function() {
+        const isBot = navigator.webdriver || 
+          /HeadlessChrome|PhantomJS|Wget|Scrapy|cURL|python-requests|aiohttp|httpx/i.test(navigator.userAgent) ||
+          window._phantom || window.__nightmare;
+        if (isBot) {
+          document.documentElement.setAttribute('data-scanned', '1');
+        }
+        const pfp = document.querySelector('.pfp-img');
+        if (pfp) {
+          pfp.addEventListener('contextmenu', (e) => e.preventDefault());
+          pfp.addEventListener('dragstart', (e) => e.preventDefault());
+        }
+      })();
+    })();
+  </script>
+</body>
+</html>
